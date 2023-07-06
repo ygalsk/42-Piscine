@@ -1,0 +1,30 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    recursion                                          :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jreimann <jreimann@student.42heilbronn.de  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/24 12:47:46 by jreimann          #+#    #+#              #
+#    Updated: 2023/06/24 12:50:01 by jreimann         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+/* Tail Recursion - Source: https://www.geeksforgeeks.org/tail-recursion/ */
+// Last reached: 24.06.2023
+
+
+//An example of tail recursive function
+
+void	print(int n)
+{
+	if (n < 0)
+		return;
+	printf("%d, n);
+	print(n - 1);
+}
+
+//The last executed statement is recursive call
+
+
+

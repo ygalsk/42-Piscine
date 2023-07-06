@@ -1,0 +1,173 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww23840\viewh18780\viewkind0
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 The \'93 3 legendary Keys\'94 of Backtracking\
+\
+1. Choice\
+\
+2. Constraints\
+\
+3. Goal\
+\
+The Choice:\
+\
+	For our example \'91solving the skyscraper puzzle/ a sudoku-board\'92\
+	we need to fill in the cells.\
+\
+	What are cells and where they are located?\
+\
+	A cell is \'91sitting\'92 inside a row and a col(umn), so we have a basic understanding of how our code should look like\
+\
+	for example like this:\
+\
+	solve(row, col ..) \{\
+\
+	So how are we going to solve this cell? What is the actually process of writing the code to solve the cell?\
+\
+	The first BIG step is breaking down the Problem and looking at it one at a time.\
+\
+	For example:\
+\
+	If our Problem is solving the skyscraper Puzzle that has the size n x n ( in our case 4x 4)\
+	we need to reduce the Problem to one row at a time ( so we have a 4 x 1)\
+	\
+	Our choice will be putting in the numbers in every cell inside this row, but first we need to understand \
+	what we are able to put inside the cells ( in our example its the numbers from 1 to 4 )\
+	\
+	So now we have to think about, when we are placing a number inside the cell it would look like this:\
+	bringing back the code snippet:\
+\
+	int 	solve(int board[N][N], int row, int col)\
+	\{\
+		int value;\
+\
+		value = 1;\
+		while (value <= 4)\
+		\{\
+			board[row][col] = value;\
+			value++;\
+		\}\
+	\}\
+\
+The Constrains:\
+ \
+	After selecting our choice of how we want to approach our Problem we now need to implement \
+	constrains to those choices:\
+\
+	The key of implementing constraints is checking if the placement of the number, inside the column is a valid one.\
+	going back to our code:\
+	\
+	int 	solve(int board[N][N], int row, int col)\
+	\{\
+		int value;\
+\
+		value = 1;\
+		while (value <= 4)\
+		\{\
+			board[row][col] = value;\
+\
+			if(validPlacement(row, col\'85))\
+			\{\
+			\}\
+		value++;\
+		\}\
+	\}\
+\
+	To use the validation of the position of the number, we can put in a recursion ( see introduction to recursive functions )\
+	So lets do this and talk about how it works:\
+\
+	int 	solve(int board[N][N], int row, int col)\
+	\{\
+		int value;\
+\
+		value = 1;\
+		while (value <= 4)\
+		\{\
+			board[row][col] = value;\
+\
+			if(validPlacement(row, col\'85))\
+			\{\
+				if(solve(board, row + 1, 0))\
+				\{\
+					return true;\
+				\}\
+			\}\
+		value++;\
+		\}\
+	\}\
+	\
+	So why are we using col + 1, its pretty simple we use +1 to move onto the next column after solving the current one (if the conditions we met are valid)\
+	and even if we go way to the end of the row and solved the last cell, we simple go unto the next column until we reached the final row.\
+	This is creating a base case for our recursion.\
+	It should look like this:\
+\
+	int 	solve(int board[N][N], int row, int col)\
+	\{\
+           if(col == N)\
+		\{\
+			// Move to the next row when reaching the end of column\
+\
+			row++;\
+			col = 0;\
+		\}	\
+		int value;\
+\
+		value = 1;\
+		while (value <= 4)\
+		\{\
+			board[row][col] = value;\
+		\}\
+			if(validPlacement(row, col\'85))\
+			\{\
+				if(solve(board, row + 1, 0))\
+				\{\
+					// Move to the next row and start from the first column\
+\
+					return 1;\
+				\}\
+			\}\
+		value++;\
+		\}\
+	\}\
+	\
+	After we now have our base case we can move on to the last step: Our Goal!\
+\
+The Goal:\
+	#define board // used to set the boundaries of the board\
+	\
+	int 	solve(int board[N][N], int row, int col)\
+	\{\
+	  if (row == N -1 && col == N)\
+		\{\
+			//Base Case: reached the end of the column,\
+			// indicating a solution was found\
+\
+			return 1;\
+		\}\
+	\
+           if(col == N)\
+		\{\
+			row++;\
+			col = 0;\
+		\}	\
+		int value;\
+\
+		value = 1;\
+		while (value <= 4)\
+		\{\
+			board[row][col] = value;\
+		\}\
+			if(validPlacement(row, col\'85))\
+			\{\
+				if(solve(board, row + 1, 0))\
+				\{\
+					return true;\
+				\}\
+			\}\
+		value++;\
+		\}\
+	\}}

@@ -1,0 +1,84 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    notes_Rush01                                       :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jreimann <jreimann@student.42heilbronn.de  +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/06/24 10:33:17 by jreimann          #+#    #+#              #
+#    Updated: 2023/06/24 15:20:53 by jreimann         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+Was wir (zusaetzlich) sehr gut beherrschen muessen fuer den Rush01:
+
+- Pointer ("allowed functions: write, malloc, free")
+- Arrays
+- Rekursive Funktionen
+- Backtracking
+
+
+
+
+
+
+Grober Plan fuer das Programm (Vorschlag von Zwischenschritten fuer das Programm):
+
+
+A) Erstelle alle moeglichen Loesungen, um ein Feld von 4 x 4 so mit den Zahlen "1, 2, 3, 4" zu fuellen, dass in allen "rows" und "columns" jede Zahl nur einmal vorkommt (Sudoku). (Arrays, Zahlen anordnen mithilfe von Pointern (dereferencing))
+
+B) Checke nach und nach, ob die Randbedingungen bei den Loesungen erfuellt werden.
+
+ 1.) Finde moegliche Loesungen fuer eine "row". (while-loops, if / else statements)
+	 a) Finde alle moeglichen Loesungen, die die Bedingungen der "row1left" erfuellen.
+	 b)                "               ,        "                "row1right" erfuellen.
+	 c)                "               ,        "            der "row1left" und "row1right" erfuellen.
+
+2.) Verfahre so mit jeder "row".
+
+3.) Finde moegliche Loesungen, die die Bedingungen ALLER "rows" erfuellt.
+
+4.) Wiederhole die Schritte B) 1., 2., 3.  mit allen "columns".
+
+5.) Finde moegliche Loesungen, die die Bedingungen ALLER "rows" UND "columns" erfuellen.
+
+
+C) Zeige eine (nur eine!) moegliche Loesung im Display ( write() ) im gewuenschten Format. (--> Abbruch, sobald eine Loesung gefunden wurde, die alle Bedingungen erfuellt)
+
+
+D) "Error"-Handling. (Output "Error" + Nachricht fuer User)
+
+
+E) Testing
+
+
+F) Jedes "file" Korrekturlesen: z. B. richtiger Header (<stdlib.h> fuer "malloc" etc.)
+
+ 
+G) Norminette
+   (Erlaubte Laenge von Funktionen (25 Zeilen?) u. ae. essentielle Dinge (nur "while"-loops nutzen) schon von Anfang an im Blick behalten!!!
+
+
+
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! Waere: Brute Force (Problem: Runtime!)
+
+
+
+
+! Achtung: Runtime steigt exponentiell
+! Besser: Anwendung von Backtracking (N Queen Problem)
+
+
+! Schneller, wenn klare Faelle sofort festgelegt werden: 
+a) 4 und 4 als Randbedingung ueber Ecke: nur eine Moeglichkeit, die Zahlen zu sortieren. (1, 2, 3, 4) --> if: hoechste Zahl, while-loop mit Counter (n + 1)
+b) 1 und 1 als Randbedingung ueber Ecke: nur eine Moeglichkeit, die Zahlen zu sortieren. (4, 3, 2, 1) --> if: niedrigste Zahl, while-loop mit Counter (n - 1)
+c)  --> Diese Zahlen festlegen, in allen anderen Kaestchen die entsprechende Moeglichkeit loeschen (Sudoku) (Wie "Moeglichkeit loeschen" / moegliche Loesungen als Menge abspeichern und eliminierte Faelle herausloeschen?) 
+
+
+
+! Anwendung von rekursiven Funktionen (! Achtung: Runtime, Call Stack)
+! Um den Punkt festzulegen, an dem aktive Subroutinen die Kontrolle zurueckgeben, sobald sie nicht mehr ausgefuehrt werden: malloc(), free() (?)
+
+--> Zeige eine (nur eine!) moegliche Loesung im Display ( write() ) im gewuenschten Format. (--> Abbruch, sobald eine Loesung gefunden wurde, die alle Bedingungen erfuellt)
+
